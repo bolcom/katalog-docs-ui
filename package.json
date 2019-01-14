@@ -1,10 +1,10 @@
 {
-  "name": "couchbase-docs-ui",
-  "description": "Produces the UI bundle used by the Couchbase documentation site",
-  "homepage": "https://docs.couchbase.com",
+  "name": "katalog-docs-ui",
+  "description": "Produces the UI bundle used by the Katalog documentation site",
+  "homepage": "https://bolcom.github.io/katalog",
   "repository": {
     "type": "git",
-    "url": "https://github.com/couchbase/docs-ui.git"
+    "url": "https://github.com/bolcom/katalog-docs-ui.git"
   },
   "engines": {
     "node": ">= 8.0.0"
