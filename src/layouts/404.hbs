@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-{{> head-first}}
+{{> head-first uiRootPath="/katalog/_"}}
     <title>{{{detag (or page.title 'Page Not Found')}}}{{#if site.title}} | {{{site.title}}}{{/if}}</title>
-{{> head-last}}
+{{> head-last uiRootPath="/katalog/_"}}
   </head>
   <body class="status-404">
-{{> header}}
-{{> body-404}}
-{{> footer}}
+{{> header uiRootPath="/katalog/_"}}
+{{> body-404 uiRootPath="/katalog/_"}}
+{{> footer uiRootPath="/katalog/_"}}
   </body>
 </html>
