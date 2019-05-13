@@ -31,19 +31,19 @@ const jsFiles = [
 
 gulp.task('lint:css', () => lintCss(cssFiles))
 gulp.task('lint:js', () => lintJs(jsFiles))
-gulp.task('lint', ['lint:css', 'lint:js'])
+gulp.task('lint', gulp.series(['lint:css', 'lint:js'], (done) => done()))
 
 gulp.task('format', () => format(jsFiles))
 
 gulp.task('build', function () {
-  return build(srcDir, destDir, this.seq.slice(0).pop() === 'preview')
+  return build(srcDir, destDir, false)
 })
 
-gulp.task('build:preview', ['build'], () =>
+gulp.task('build:preview', gulp.series(['build'], () =>
   buildPreview(srcDir, destDir, previewSiteSrcDir, previewSiteDestDir, connect.reload)
-)
+))
 
-gulp.task('preview', ['build:preview'], () =>
+gulp.task('preview', gulp.series(['build:preview'], () =>
   preview(previewSiteDestDir, {
     port: 5252,
     livereload: process.env.LIVERELOAD === 'true',
@@ -52,11 +52,11 @@ gulp.task('preview', ['build:preview'], () =>
       onChange: () => gulp.start('build:preview'),
     },
   })
-)
+))
 
-gulp.task('pack', ['build', 'lint'], () => pack(destDir, buildDir, bundleName))
+gulp.task('pack', gulp.series(['build', 'lint'], () => pack(destDir, buildDir, bundleName)))
 
-gulp.task('release', ['pack'], () =>
-  release(buildDir, bundleName, 'couchbase', 'docs-ui', process.env.GITHUB_API_TOKEN))
+gulp.task('release', gulp.series(['pack'], () =>
+  release(buildDir, bundleName, 'couchbase', 'docs-ui', process.env.GITHUB_API_TOKEN)))
 
-gulp.task('default', ['build'])
+gulp.task('default', gulp.series(['build'], (done) => done()))
