@@ -39,8 +39,8 @@ pipeline {
     }
     stage('Install') {
       steps {
-        nodejs('node8') {
-          sh 'yarn --no-progress --cache-folder=.cache/yarn --pure-lockfile'
+        nodejs('node10') {
+          sh 'npm install --quiet --no-progress --cache=.cache/npm --no-audit'
         }
       }
     }
@@ -50,7 +50,7 @@ pipeline {
           deleteDir()
         }
         withCredentials([githubApiTokenCredentials]) {
-          nodejs('node8') {
+          nodejs('node10') {
             sh '$(npm bin)/gulp release'
           }
         }
