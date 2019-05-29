@@ -54,6 +54,7 @@
   }
 
   function fitNavMenu (preferredHeight, availableHeight, encroachingElement) {
+    if (!encroachingElement) return
     var reclaimedHeight = availableHeight - encroachingElement.getBoundingClientRect().top
     navMenu.element.style.height = reclaimedHeight > 0 ? Math.max(0, preferredHeight - reclaimedHeight) + 'px' : ''
   }
